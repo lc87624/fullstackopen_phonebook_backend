@@ -90,13 +90,7 @@ app.post('/api/persons', (request, response) => {
     response.status(201).json(newPerson)
 })
 
-<<<<<<< HEAD
 const PORT = process.env.PORT || 3001
-
-app.listen(PORT, () => {
-=======
-const PORT = process.env.PORT || 5000
 app.listen(PORT, '0.0.0.0', () => {
->>>>>>> 64c441b (Add landing page and adjust server configuration for Replit environment)
     console.log(`Server running on port ${PORT}`)
 })
