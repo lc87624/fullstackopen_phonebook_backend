@@ -17,10 +17,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "build:ui": "rm -rf dist && cd ../fullstackopen_submissions/phonebook/ && npm run build --prod && cp -r dist ../../fullstackopen_phonebook_backend/",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "dependencies": {
-    "cors": "^2.8.6",
     "express": "^5.2.1",
     "morgan": "^1.10.1"
   }
