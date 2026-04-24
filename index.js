@@ -31,15 +31,15 @@ const persons = [
     }
 ]
 
-app.get('/', (request, response) => {
-    response.send(`
-        <h1>Phonebook Backend</h1>
-        <ul>
-            <li><a href="/api/persons">/api/persons</a></li>
-            <li><a href="/info">/info</a></li>
-        </ul>
-    `)
-})
+// app.get('/', (request, response) => {
+//     response.send(`
+//         <h1>Phonebook Backend</h1>
+//         <ul>
+//             <li><a href="/api/persons">/api/persons</a></li>
+//             <li><a href="/info">/info</a></li>
+//         </ul>
+//     `)
+// })
 
 app.get('/api/persons', (request, response) => {
     response.json(persons)
