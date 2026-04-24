@@ -1,1 +1,1 @@
-Deploy with Replit: https://fullstackopenphonebookbackend--yuzhong711.replit.app
+Deploy with vercel: https://fullstackopen-phonebook-backend.vercel.app/
