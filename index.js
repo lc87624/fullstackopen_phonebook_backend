@@ -76,17 +76,16 @@ app.put('/api/persons/:id', (request, response, next) => {
     const id = request.params.id
     const { name, number } = request.body
 
-    Person.findById(id).then(person => {
-        if (!person) {
-            return response.status(404).end()
-        }
-
-        person.name = name
-        person.number = number
-
-        return person.save().then(updatedPerson => {
+    Person.findByIdAndUpdate(
+        id, 
+        { name, number }, 
+        { returnDocument: 'after', runValidators: true }
+    ).then(updatedPerson => {
+        if (updatedPerson) {
             response.json(updatedPerson)
-        })
+        } else {
+            response.status(404).end()
+        }
     }).catch(error => next(error))
 })
 
@@ -95,6 +94,8 @@ const errorHandler = (error, request, response, next) => {
 
     if (error.name === 'CastError') {
         return response.status(400).json({ error: 'Invalid id' })
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({ error: error.message })
     }
 
     return response.status(500).json({ error: error.message })
@@ -103,6 +104,11 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on port ${PORT}`)
-})
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server running on port ${PORT}`)
+    })
+}
+
+module.exports = app
+
